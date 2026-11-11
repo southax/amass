@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
+	amassnet "github.com/southax/amass/v5/internal/net"
 )
 
 // Banner is the ASCII art logo used within help output.

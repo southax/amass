@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamgen "github.com/owasp-amass/open-asset-model/general"
 	oamorg "github.com/owasp-amass/open-asset-model/org"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 func CreateOrgRDAPHandle(sess et.Session, orgent *dbt.Entity, handle string, src *et.Source) (*dbt.Entity, error) {

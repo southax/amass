@@ -16,7 +16,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/owasp-amass/amass/v5/config"
+	"github.com/southax/amass/v5/config"
 )
 
 const relatedPage1 = `{"meta":{"next_cursor":"c2","units_charged":3,"units_to_complete":1,"units_remaining":50},

@@ -11,9 +11,9 @@ import (
 	"strings"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	"github.com/owasp-amass/open-asset-model/general"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 func (g *gleif) createLEIIdentifier(session et.Session, orgent *dbt.Entity, lei *general.Identifier, conf int) (*dbt.Entity, error) {

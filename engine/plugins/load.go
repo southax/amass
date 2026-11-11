@@ -5,22 +5,22 @@
 package plugins
 
 import (
-	"github.com/owasp-amass/amass/v5/engine/plugins/api"
-	"github.com/owasp-amass/amass/v5/engine/plugins/api/aviato"
-	"github.com/owasp-amass/amass/v5/engine/plugins/api/gleif"
-	"github.com/owasp-amass/amass/v5/engine/plugins/api/ndxer"
-	"github.com/owasp-amass/amass/v5/engine/plugins/api/rdap"
-	"github.com/owasp-amass/amass/v5/engine/plugins/archive"
-	"github.com/owasp-amass/amass/v5/engine/plugins/brute"
-	"github.com/owasp-amass/amass/v5/engine/plugins/dns"
-	"github.com/owasp-amass/amass/v5/engine/plugins/enrich"
-	"github.com/owasp-amass/amass/v5/engine/plugins/horizontals"
-	"github.com/owasp-amass/amass/v5/engine/plugins/scrape"
-	dnssd "github.com/owasp-amass/amass/v5/engine/plugins/service_discovery/dns"
-	hp "github.com/owasp-amass/amass/v5/engine/plugins/service_discovery/http_probes"
-	"github.com/owasp-amass/amass/v5/engine/plugins/whois"
-	"github.com/owasp-amass/amass/v5/engine/plugins/whois/bgptools"
-	et "github.com/owasp-amass/amass/v5/engine/types"
+	"github.com/southax/amass/v5/engine/plugins/api"
+	"github.com/southax/amass/v5/engine/plugins/api/aviato"
+	"github.com/southax/amass/v5/engine/plugins/api/gleif"
+	"github.com/southax/amass/v5/engine/plugins/api/ndxer"
+	"github.com/southax/amass/v5/engine/plugins/api/rdap"
+	"github.com/southax/amass/v5/engine/plugins/archive"
+	"github.com/southax/amass/v5/engine/plugins/brute"
+	"github.com/southax/amass/v5/engine/plugins/dns"
+	"github.com/southax/amass/v5/engine/plugins/enrich"
+	"github.com/southax/amass/v5/engine/plugins/horizontals"
+	"github.com/southax/amass/v5/engine/plugins/scrape"
+	dnssd "github.com/southax/amass/v5/engine/plugins/service_discovery/dns"
+	hp "github.com/southax/amass/v5/engine/plugins/service_discovery/http_probes"
+	"github.com/southax/amass/v5/engine/plugins/whois"
+	"github.com/southax/amass/v5/engine/plugins/whois/bgptools"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 var pluginNewFuncs = []func() et.Plugin{

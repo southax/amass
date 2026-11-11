@@ -14,13 +14,13 @@ import (
 
 	"github.com/caffix/stringset"
 	"github.com/miekg/dns"
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	"github.com/owasp-amass/open-asset-model/general"
 	"github.com/owasp-amass/resolve/utils"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
 	"golang.org/x/net/publicsuffix"
 )
 

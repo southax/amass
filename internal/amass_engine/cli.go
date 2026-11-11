@@ -16,10 +16,10 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine"
-	"github.com/owasp-amass/amass/v5/internal/afmt"
-	"github.com/owasp-amass/amass/v5/internal/tools"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine"
+	"github.com/southax/amass/v5/internal/afmt"
+	"github.com/southax/amass/v5/internal/tools"
 )
 
 const (

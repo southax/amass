@@ -12,12 +12,12 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 	"golang.org/x/time/rate"
 )
 

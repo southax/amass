@@ -7,7 +7,7 @@ package aviato
 import (
 	"log/slog"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
+	et "github.com/southax/amass/v5/engine/types"
 	"golang.org/x/time/rate"
 )
 

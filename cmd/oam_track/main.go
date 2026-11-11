@@ -26,7 +26,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/owasp-amass/amass/v5/internal/track"
+	"github.com/southax/amass/v5/internal/track"
 )
 
 func main() {

@@ -19,14 +19,14 @@ import (
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/fatih/color"
 	"github.com/google/uuid"
-	"github.com/owasp-amass/amass/v5/config"
-	client "github.com/owasp-amass/amass/v5/engine/api/client/v1"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	"github.com/owasp-amass/amass/v5/internal/afmt"
-	"github.com/owasp-amass/amass/v5/internal/tools"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	oamorg "github.com/owasp-amass/open-asset-model/org"
+	"github.com/southax/amass/v5/config"
+	client "github.com/southax/amass/v5/engine/api/client/v1"
+	et "github.com/southax/amass/v5/engine/types"
+	"github.com/southax/amass/v5/internal/afmt"
+	"github.com/southax/amass/v5/internal/tools"
 )
 
 const (

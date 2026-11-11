@@ -11,8 +11,6 @@ import (
 	"net/netip"
 	"time"
 
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
@@ -20,6 +18,8 @@ import (
 	oamnet "github.com/owasp-amass/open-asset-model/network"
 	"github.com/owasp-amass/open-asset-model/platform"
 	oamurl "github.com/owasp-amass/open-asset-model/url"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type bannerURLs struct {

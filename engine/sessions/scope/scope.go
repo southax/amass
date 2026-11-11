@@ -8,7 +8,6 @@ import (
 	"net/netip"
 	"strings"
 
-	amassdns "github.com/owasp-amass/amass/v5/internal/net/dns"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcert "github.com/owasp-amass/open-asset-model/certificate"
 	oamcon "github.com/owasp-amass/open-asset-model/contact"
@@ -18,6 +17,7 @@ import (
 	oamorg "github.com/owasp-amass/open-asset-model/org"
 	oamreg "github.com/owasp-amass/open-asset-model/registration"
 	oamurl "github.com/owasp-amass/open-asset-model/url"
+	amassdns "github.com/southax/amass/v5/internal/net/dns"
 )
 
 func (s *Scope) Add(a oam.Asset) bool {

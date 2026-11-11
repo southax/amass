@@ -17,10 +17,10 @@ import (
 	"time"
 
 	"github.com/miekg/dns"
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
 	oam "github.com/owasp-amass/open-asset-model"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
+	amassnet "github.com/southax/amass/v5/internal/net"
 	"golang.org/x/time/rate"
 )
 

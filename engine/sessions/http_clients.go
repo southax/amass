@@ -10,7 +10,7 @@ import (
 	"net/http/cookiejar"
 	"time"
 
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
+	amassnet "github.com/southax/amass/v5/internal/net"
 )
 
 // Clients bundles the three clients + transports so you can close idle conns.

@@ -10,12 +10,12 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	"github.com/owasp-amass/open-asset-model/contact"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type contactrec struct {

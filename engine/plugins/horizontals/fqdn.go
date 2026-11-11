@@ -7,9 +7,9 @@ package horizontals
 import (
 	"errors"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type horfqdn struct {

@@ -12,14 +12,14 @@ import (
 	"net/netip"
 	"time"
 
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	"github.com/owasp-amass/amass/v5/engine/sessions"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	"github.com/owasp-amass/open-asset-model/general"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	"github.com/southax/amass/v5/engine/sessions"
+	et "github.com/southax/amass/v5/engine/types"
+	amassnet "github.com/southax/amass/v5/internal/net"
 )
 
 type ipNetblock struct {

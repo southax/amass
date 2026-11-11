@@ -14,8 +14,6 @@ import (
 	"github.com/adrg/strutil"
 	"github.com/adrg/strutil/metrics"
 	"github.com/caffix/stringset"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassdns "github.com/owasp-amass/amass/v5/internal/net/dns"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcert "github.com/owasp-amass/open-asset-model/certificate"
@@ -23,6 +21,8 @@ import (
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	oamorg "github.com/owasp-amass/open-asset-model/org"
 	oamreg "github.com/owasp-amass/open-asset-model/registration"
+	et "github.com/southax/amass/v5/engine/types"
+	amassdns "github.com/southax/amass/v5/internal/net/dns"
 	"golang.org/x/net/publicsuffix"
 )
 

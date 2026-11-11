@@ -10,7 +10,6 @@ import (
 	"strings"
 	"time"
 
-	amassdb "github.com/owasp-amass/amass/v5/internal/db"
 	"github.com/owasp-amass/asset-db/repository"
 	"github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
@@ -19,6 +18,7 @@ import (
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	"github.com/owasp-amass/open-asset-model/org"
 	oamreg "github.com/owasp-amass/open-asset-model/registration"
+	amassdb "github.com/southax/amass/v5/internal/db"
 )
 
 // Edge represents an Amass graph edge in the viz package.

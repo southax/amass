@@ -1,4 +1,4 @@
-module github.com/owasp-amass/amass/v5
+module github.com/southax/amass/v5
 
 go 1.26.0
 

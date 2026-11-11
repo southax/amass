@@ -14,9 +14,9 @@ import (
 	"time"
 
 	biter "github.com/biter777/countries"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
 	"github.com/owasp-amass/open-asset-model/contact"
 	pioz "github.com/pioz/countries"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 )
 
 type parsedComponent struct {

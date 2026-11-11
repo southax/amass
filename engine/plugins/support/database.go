@@ -12,7 +12,6 @@ import (
 	"strings"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcert "github.com/owasp-amass/open-asset-model/certificate"
@@ -20,6 +19,7 @@ import (
 	oamgen "github.com/owasp-amass/open-asset-model/general"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
 	oamplat "github.com/owasp-amass/open-asset-model/platform"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 func StoreFQDNsWithSource(session et.Session, names []string, src *et.Source, plugin, handler string) []*dbt.Entity {

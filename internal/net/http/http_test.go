@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/caffix/stringset"
-	amassdns "github.com/owasp-amass/amass/v5/internal/net/dns"
+	amassdns "github.com/southax/amass/v5/internal/net/dns"
 )
 
 func TestRequestWebPage(t *testing.T) {

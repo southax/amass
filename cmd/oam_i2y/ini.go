@@ -15,7 +15,7 @@ import (
 	"sync"
 
 	"github.com/caffix/stringset"
-	"github.com/owasp-amass/amass/v5/internal/net/dns"
+	"github.com/southax/amass/v5/internal/net/dns"
 	ini "gopkg.in/ini.v1"
 )
 

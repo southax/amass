@@ -12,8 +12,8 @@ import (
 	"strings"
 
 	"github.com/caffix/stringset"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
-	"github.com/owasp-amass/amass/v5/internal/net/dns"
+	amassnet "github.com/southax/amass/v5/internal/net"
+	"github.com/southax/amass/v5/internal/net/dns"
 )
 
 func (c *Config) loadSeedandScopeSettings() error {

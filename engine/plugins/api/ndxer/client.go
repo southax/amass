@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
+	et "github.com/southax/amass/v5/engine/types"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 	"golang.org/x/time/rate"
 )
 

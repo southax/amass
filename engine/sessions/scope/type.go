@@ -7,8 +7,8 @@ package scope
 import (
 	"sync"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	oam "github.com/owasp-amass/open-asset-model"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type Scope struct {

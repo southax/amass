@@ -19,10 +19,6 @@ import (
 	"github.com/openrdap/rdap"
 	"github.com/openrdap/rdap/bootstrap"
 	"github.com/openrdap/rdap/bootstrap/cache"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	"github.com/owasp-amass/amass/v5/engine/plugins/support/org"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	"github.com/owasp-amass/open-asset-model/contact"
@@ -30,6 +26,10 @@ import (
 	oamorg "github.com/owasp-amass/open-asset-model/org"
 	oamreg "github.com/owasp-amass/open-asset-model/registration"
 	"github.com/owasp-amass/open-asset-model/url"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	"github.com/southax/amass/v5/engine/plugins/support/org"
+	et "github.com/southax/amass/v5/engine/types"
 	"golang.org/x/time/rate"
 )
 

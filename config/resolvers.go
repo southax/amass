@@ -17,7 +17,7 @@ import (
 	"strings"
 
 	"github.com/caffix/stringset"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 )
 
 // DefaultQueriesPerPublicResolver is the number of queries sent to each public DNS resolver per second.

@@ -8,10 +8,10 @@ import (
 	"net"
 	"net/netip"
 
-	"github.com/owasp-amass/amass/v5/config"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
+	"github.com/southax/amass/v5/config"
 )
 
 // ipnet2Prefix converts a net.IPNet to a netip.Prefix.

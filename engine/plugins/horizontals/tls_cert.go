@@ -9,11 +9,11 @@ import (
 	"errors"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcert "github.com/owasp-amass/open-asset-model/certificate"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type horTlsCert struct {

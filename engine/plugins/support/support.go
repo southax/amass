@@ -15,16 +15,16 @@ import (
 	"time"
 
 	"github.com/caffix/stringset"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine/sessions"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
-	"github.com/owasp-amass/amass/v5/internal/net/dns"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
 	"github.com/owasp-amass/open-asset-model/url"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine/sessions"
+	et "github.com/southax/amass/v5/engine/types"
+	amassnet "github.com/southax/amass/v5/internal/net"
+	"github.com/southax/amass/v5/internal/net/dns"
 	xurls "mvdan.cc/xurls/v2"
 )
 

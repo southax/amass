@@ -13,8 +13,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine/pubsub"
 	"github.com/owasp-amass/asset-db/repository"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
@@ -22,6 +20,8 @@ import (
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	oamnet "github.com/owasp-amass/open-asset-model/network"
 	oamorg "github.com/owasp-amass/open-asset-model/org"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine/pubsub"
 	"github.com/yl2chen/cidranger"
 )
 

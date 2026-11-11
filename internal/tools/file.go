@@ -11,8 +11,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/resources"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/resources"
 )
 
 func CreateOutputDirectory(dirpath string) error {

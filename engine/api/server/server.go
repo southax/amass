@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	v1 "github.com/owasp-amass/amass/v5/engine/api/server/v1"
-	et "github.com/owasp-amass/amass/v5/engine/types"
+	v1 "github.com/southax/amass/v5/engine/api/server/v1"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type ErrorResponse struct {

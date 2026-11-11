@@ -16,17 +16,17 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/engine/pubsub"
-	"github.com/owasp-amass/amass/v5/engine/sessions/scope"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
 	assetdb "github.com/owasp-amass/asset-db"
 	"github.com/owasp-amass/asset-db/repository"
 	"github.com/owasp-amass/asset-db/repository/neo4j"
 	"github.com/owasp-amass/asset-db/repository/postgres"
 	"github.com/owasp-amass/asset-db/repository/sqlite3"
 	oam "github.com/owasp-amass/open-asset-model"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/engine/pubsub"
+	"github.com/southax/amass/v5/engine/sessions/scope"
+	et "github.com/southax/amass/v5/engine/types"
+	amassnet "github.com/southax/amass/v5/internal/net"
 	"github.com/yl2chen/cidranger"
 )
 

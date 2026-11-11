@@ -14,9 +14,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
-	"github.com/owasp-amass/amass/v5/config"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	oam "github.com/owasp-amass/open-asset-model"
+	"github.com/southax/amass/v5/config"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 const maxBulkItems = 5000

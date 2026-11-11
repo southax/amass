@@ -11,14 +11,14 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/owasp-amass/amass/v5/engine/plugins/support"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcert "github.com/owasp-amass/open-asset-model/certificate"
 	oamgen "github.com/owasp-amass/open-asset-model/general"
 	oamplat "github.com/owasp-amass/open-asset-model/platform"
+	"github.com/southax/amass/v5/engine/plugins/support"
+	et "github.com/southax/amass/v5/engine/types"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 )
 
 type httpProbing struct {

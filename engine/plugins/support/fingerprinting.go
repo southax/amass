@@ -12,12 +12,12 @@ import (
 	"time"
 
 	jarm "github.com/caffix/jarm-go"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amassnet "github.com/owasp-amass/amass/v5/internal/net"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	"github.com/owasp-amass/open-asset-model/general"
 	"github.com/owasp-amass/open-asset-model/network"
+	et "github.com/southax/amass/v5/engine/types"
+	amassnet "github.com/southax/amass/v5/internal/net"
 )
 
 func JARMFingerprint(sess et.Session, target oam.Asset, portrel *general.PortRelation) (string, error) {

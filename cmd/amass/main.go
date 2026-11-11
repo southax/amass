@@ -31,15 +31,15 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/owasp-amass/amass/v5/config"
-	"github.com/owasp-amass/amass/v5/internal/afmt"
-	ae "github.com/owasp-amass/amass/v5/internal/amass_engine"
-	"github.com/owasp-amass/amass/v5/internal/assoc"
-	"github.com/owasp-amass/amass/v5/internal/enum"
-	"github.com/owasp-amass/amass/v5/internal/subs"
-	"github.com/owasp-amass/amass/v5/internal/tools"
-	"github.com/owasp-amass/amass/v5/internal/track"
-	"github.com/owasp-amass/amass/v5/internal/viz"
+	"github.com/southax/amass/v5/config"
+	"github.com/southax/amass/v5/internal/afmt"
+	ae "github.com/southax/amass/v5/internal/amass_engine"
+	"github.com/southax/amass/v5/internal/assoc"
+	"github.com/southax/amass/v5/internal/enum"
+	"github.com/southax/amass/v5/internal/subs"
+	"github.com/southax/amass/v5/internal/tools"
+	"github.com/southax/amass/v5/internal/track"
+	"github.com/southax/amass/v5/internal/viz"
 )
 
 const (

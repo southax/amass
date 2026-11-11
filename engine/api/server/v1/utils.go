@@ -14,7 +14,6 @@ import (
 	"strings"
 	"time"
 
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamacct "github.com/owasp-amass/open-asset-model/account"
@@ -30,6 +29,7 @@ import (
 	oamplat "github.com/owasp-amass/open-asset-model/platform"
 	oamreg "github.com/owasp-amass/open-asset-model/registration"
 	oamurl "github.com/owasp-amass/open-asset-model/url"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type ErrorResponse struct {

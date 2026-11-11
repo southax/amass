@@ -14,9 +14,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	afmt "github.com/owasp-amass/amass/v5/internal/afmt"
 	slogcommon "github.com/samber/slog-common"
 	slogsyslog "github.com/samber/slog-syslog/v2"
+	afmt "github.com/southax/amass/v5/internal/afmt"
 )
 
 func WriteLogMessage(l *slog.Logger, message string) error {

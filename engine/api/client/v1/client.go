@@ -17,11 +17,11 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
-	"github.com/owasp-amass/amass/v5/config"
-	apiclient "github.com/owasp-amass/amass/v5/engine/api/client"
-	et "github.com/owasp-amass/amass/v5/engine/types"
-	amasshttp "github.com/owasp-amass/amass/v5/internal/net/http"
 	oam "github.com/owasp-amass/open-asset-model"
+	"github.com/southax/amass/v5/config"
+	apiclient "github.com/southax/amass/v5/engine/api/client"
+	et "github.com/southax/amass/v5/engine/types"
+	amasshttp "github.com/southax/amass/v5/internal/net/http"
 )
 
 const MaxBulkItems = 1000

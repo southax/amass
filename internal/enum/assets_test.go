@@ -7,8 +7,8 @@ package enum
 import (
 	"testing"
 
-	"github.com/owasp-amass/amass/v5/config"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
+	"github.com/southax/amass/v5/config"
 )
 
 func TestMakeAssetsWithProvidedNames(t *testing.T) {

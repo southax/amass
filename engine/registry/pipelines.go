@@ -15,9 +15,9 @@ import (
 	"github.com/caffix/pipeline"
 	"github.com/caffix/queue"
 	multierror "github.com/hashicorp/go-multierror"
-	"github.com/owasp-amass/amass/v5/config"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	oam "github.com/owasp-amass/open-asset-model"
+	"github.com/southax/amass/v5/config"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 var (

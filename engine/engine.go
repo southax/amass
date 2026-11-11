@@ -13,12 +13,12 @@ import (
 
 	_ "net/http/pprof"
 
-	"github.com/owasp-amass/amass/v5/engine/api/server"
-	"github.com/owasp-amass/amass/v5/engine/dispatcher"
-	"github.com/owasp-amass/amass/v5/engine/plugins"
-	"github.com/owasp-amass/amass/v5/engine/registry"
-	"github.com/owasp-amass/amass/v5/engine/sessions"
-	et "github.com/owasp-amass/amass/v5/engine/types"
+	"github.com/southax/amass/v5/engine/api/server"
+	"github.com/southax/amass/v5/engine/dispatcher"
+	"github.com/southax/amass/v5/engine/plugins"
+	"github.com/southax/amass/v5/engine/registry"
+	"github.com/southax/amass/v5/engine/sessions"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 type Engine struct {

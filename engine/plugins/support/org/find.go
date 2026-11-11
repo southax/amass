@@ -10,11 +10,11 @@ import (
 	"time"
 
 	"github.com/caffix/stringset"
-	et "github.com/owasp-amass/amass/v5/engine/types"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamcon "github.com/owasp-amass/open-asset-model/contact"
 	oamorg "github.com/owasp-amass/open-asset-model/org"
+	et "github.com/southax/amass/v5/engine/types"
 )
 
 func dedupChecks(sess et.Session, obj *dbt.Entity, o *oamorg.Organization) *dbt.Entity {

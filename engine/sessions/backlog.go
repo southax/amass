@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"time"
 
-	bdb "github.com/owasp-amass/amass/v5/engine/sessions/backlogdb"
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
+	bdb "github.com/southax/amass/v5/engine/sessions/backlogdb"
 )
 
 var (
