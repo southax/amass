@@ -6,6 +6,7 @@
 package ndxer
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -19,6 +20,7 @@ import (
 	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
+	oamgen "github.com/owasp-amass/open-asset-model/general"
 	"golang.org/x/time/rate"
 )
 
@@ -255,19 +257,21 @@ func (p *ndxerPlugin) addToScope(e *et.Event, domain string) (bool, error) {
 	// The asset store can fail a write that races another plugin's write of
 	// the same name ("sql: no rows in result set" from an upsert); that is
 	// transient, so try a few times before giving the domain up.
-	var ents []*dbt.Entity
-	for attempt := 0; attempt < storeAttempts && len(ents) == 0; attempt++ {
+	// Written here rather than through support.StoreFQDNsWithSource, which logs
+	// every failed attempt as an error.
+	var ent *dbt.Entity
+	var lastErr error
+	for attempt := 0; attempt < storeAttempts && ent == nil; attempt++ {
 		if attempt > 0 {
 			if err := sleepContext(e.Session.Ctx(), time.Duration(attempt)*storeRetryStep); err != nil {
 				return false, err
 			}
 		}
-		ents = support.StoreFQDNsWithSource(e.Session, []string{domain}, p.source, p.name, p.name+"-Handler")
+		ent, lastErr = p.storeFQDN(e.Session, domain)
 	}
-	if len(ents) == 0 {
-		return false, fmt.Errorf("the domain could not be stored after %d attempts", storeAttempts)
+	if ent == nil {
+		return false, fmt.Errorf("the domain could not be stored after %d attempts: %v", storeAttempts, lastErr)
 	}
-	ent := ents[0]
 
 	if !e.Session.Scope().Add(ent.Asset) {
 		if a, conf := e.Session.Scope().IsAssetInScope(ent.Asset, 0); conf > 0 && a != nil && strings.EqualFold(a.Key(), domain) {
@@ -279,4 +283,23 @@ func (p *ndxerPlugin) addToScope(e *et.Event, domain string) (bool, error) {
 		return true, fmt.Errorf("added to scope but not queued: %w", err)
 	}
 	return true, nil
+}
+
+// storeFQDN writes name as an FQDN asset with this plugin as its source.
+func (p *ndxerPlugin) storeFQDN(sess et.Session, name string) (*dbt.Entity, error) {
+	ctx, cancel := context.WithTimeout(sess.Ctx(), 30*time.Second)
+	defer cancel()
+
+	ent, err := sess.DB().CreateAsset(ctx, &oamdns.FQDN{Name: name})
+	if err != nil {
+		return nil, err
+	}
+	if ent == nil {
+		return nil, errors.New("the asset store returned no entity")
+	}
+	_, _ = sess.DB().CreateEntityProperty(ctx, ent, &oamgen.SourceProperty{
+		Source:     p.source.Name,
+		Confidence: p.source.Confidence,
+	})
+	return ent, nil
 }
