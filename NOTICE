@@ -1,0 +1,18 @@
+Amass + ndxer
+This is a modified copy of OWASP Amass (https://github.com/owasp-amass/amass),
+Copyright the OWASP Amass Project authors, licensed under the Apache
+License 2.0 (see LICENSE).
+
+Changes in this build, on top of Amass v5.1.1:
+- engine/plugins/api/ndxer/: a new data source that lists the hostnames ndxer
+  holds under every domain in scope and adds the domains ndxer links to the
+  same owner to the session scope.
+- engine/plugins/load.go: registers that data source.
+- internal/enum/cli.go: prints the ndxer data source's lines on the terminal.
+- engine/api/server/server.go, cmd/amass/process.go, cmd/ae_isready/main.go:
+  the engine port can be set with AMASS_ENGINE_PORT.
+- resources/datasources.yaml: an ndxer entry.
+- go.mod and every import: the module path is github.com/southax/amass/v5.
+- README.md: rewritten for this build.
+
+This build is not affiliated with or endorsed by OWASP or the Amass project.
