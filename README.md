@@ -130,7 +130,7 @@ ndxer related scope for example.com: added 2 domains ndxer links to the same own
   example.org  subject  Shares the verification token example-site-verification=Q2xhdWRlIGV4YW1wbGUgdG9rZW4, issued to one account.
 ndxer related scope for example.com: NOT added: 12 review domains (weaker evidence of the same owner); include them with NDXER_RELATED_CLASSES=subject,review
 ndxer related scope for example.com: 4 shared signals belong to infrastructure providers, not to the subject; never added
-ndxer related scope for example.com: 5 units charged (1 pages); each added domain's hostnames listing is charged on top
+ndxer related scope for example.com: 5 units charged (1 page); each added domain's hostnames listing is charged on top
 ```
 
 How to read them:

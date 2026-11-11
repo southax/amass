@@ -330,7 +330,11 @@ func expandRelated(log *slog.Logger, st *sessionState, seed string, res *related
 	if res.Stopped != "" {
 		log.Warn(fmt.Sprintf("ndxer related scope for %s is INCOMPLETE: %s", seed, res.Stopped), "seed", seed)
 	}
-	log.Info(fmt.Sprintf("ndxer related scope for %s: %d units charged (%d pages); each added domain's hostnames listing is charged on top", seed, res.Units, res.Pages),
+	pages := "pages"
+	if res.Pages == 1 {
+		pages = "page"
+	}
+	log.Info(fmt.Sprintf("ndxer related scope for %s: %d units charged (%d %s); each added domain's hostnames listing is charged on top", seed, res.Units, res.Pages, pages),
 		"seed", seed, "units", res.Units, "pages", res.Pages, "turn_off", envNoRelated+"=1")
 
 	return domainsOf(added)
