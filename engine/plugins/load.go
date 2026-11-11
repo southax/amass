@@ -8,6 +8,7 @@ import (
 	"github.com/owasp-amass/amass/v5/engine/plugins/api"
 	"github.com/owasp-amass/amass/v5/engine/plugins/api/aviato"
 	"github.com/owasp-amass/amass/v5/engine/plugins/api/gleif"
+	"github.com/owasp-amass/amass/v5/engine/plugins/api/ndxer"
 	"github.com/owasp-amass/amass/v5/engine/plugins/api/rdap"
 	"github.com/owasp-amass/amass/v5/engine/plugins/archive"
 	"github.com/owasp-amass/amass/v5/engine/plugins/brute"
@@ -51,6 +52,7 @@ var pluginNewFuncs = []func() et.Plugin{
 	gleif.NewGLEIF,
 	horizontals.NewHorizontals,
 	hp.NewHTTPProbing,
+	ndxer.NewNdxer,
 	rdap.NewRDAP,
 	scrape.NewBing,
 	scrape.NewDNSHistory,

@@ -125,6 +125,14 @@ datasources:
 #    creds:
 #      account: 
 #        apikey: null
+# ndxer lists the hostnames it has observed under each domain in scope and, by default,
+# ADDS the domains it links to the same owner (class subject) to the scope, so every data
+# source enumerates them. NDXER_RELATED_CLASSES=subject,review also adds the weaker matches;
+# NDXER_NO_RELATED=1 turns the addition off. The key may also come from NDXER_API_KEY.
+#  - name: ndxer
+#    creds:
+#      account:
+#        apikey: null
 #  - name: Netlas
 #    creds:
 #      account: 
