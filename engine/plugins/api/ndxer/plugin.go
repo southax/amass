@@ -33,6 +33,7 @@ type ndxerPlugin struct {
 	source  *et.Source
 	baseURL string
 	related relatedConfig
+	noWait  bool
 	envKey  string
 	state   *tracker
 	retry   backoff
@@ -62,6 +63,10 @@ func (p *ndxerPlugin) Start(r et.Registry) error {
 	p.log = r.Log().WithGroup("plugin").With("name", p.name)
 	p.envKey = strings.TrimSpace(os.Getenv(envAPIKey))
 	p.related = parseRelatedConfig(os.Getenv(envNoRelated), os.Getenv(envRelatedClasses))
+	p.noWait = parseNoWait(os.Getenv(envNoWait))
+	if p.noWait {
+		p.related.notes = append(p.related.notes, noWaitNote)
+	}
 
 	if err := r.RegisterHandler(&et.Handler{
 		Plugin:       p,
@@ -139,6 +144,10 @@ func (p *ndxerPlugin) check(e *et.Event) error {
 		limiter: p.rlimit,
 		sem:     e.Session.NetSem(),
 		retry:   p.retry,
+		noWait:  p.noWait,
+		onWait: func(subject, path string, partial bool) {
+			log.Info(waitMessage(subject, path, partial), "domain", subject, "wait_max", pendingWait.String())
+		},
 	}
 
 	p.hostnames(e, log, st, c, domain)
@@ -170,6 +179,10 @@ func (p *ndxerPlugin) hostnames(e *et.Event, log *slog.Logger, st *sessionState,
 		p.maybeTurnRelatedOff(log, st, err)
 		return
 	}
+	if res.Partial {
+		log.Warn(partialMessage("hostnames", domain, len(res.Names), res.PartialCapped),
+			"domain", domain, "kept", len(res.Names), "partial", true)
+	}
 	if res.FailFast {
 		log.Warn(fmt.Sprintf("ndxer hostnames for %s: kept %d names from the first page; listing every hostname under %s needs %d more units and %d are left this month",
 			domain, len(res.Names), domain, res.UnitsToComplete, res.UnitsRemaining),
@@ -199,6 +212,10 @@ func (p *ndxerPlugin) relatedStep(e *et.Event, log *slog.Logger, st *sessionStat
 
 	add := func(d string) (bool, error) { return p.addToScope(e, d) }
 	expandRelated(log, st, domain, res, p.related, e.Session.Config().Rigid, add)
+	if res.Partial {
+		log.Warn(partialMessage("related domains", domain, len(res.Matches), res.PartialCapped),
+			"seed", domain, "kept", len(res.Matches), "partial", true)
+	}
 }
 
 // shouldLookupRelated reports whether domain gets a related lookup. One hop

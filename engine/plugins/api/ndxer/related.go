@@ -79,6 +79,10 @@ type relatedResult struct {
 	Pages                 int
 	// Stopped is set when paging ended early; it says why.
 	Stopped string
+	// Partial is set when the list was read while more was still being added
+	// for the seed; PartialCapped when that was after the whole wait.
+	Partial       bool
+	PartialCapped bool
 }
 
 // related follows the cursor to the end. Every further page costs a unit, so
@@ -101,15 +105,19 @@ func (c *client) related(ctx context.Context, seed string) (*relatedResult, erro
 
 		var page relatedPage
 		if err := c.get(ctx, seed, relatedPath, params, &page, &pendingWaited); err != nil {
-			if errors.Is(err, errNotFound) {
-				return res, nil
-			}
+			var pe *partialError
 			var ae *apiError
-			if res.Pages > 0 && errors.As(err, &ae) && ae.Code == "quota_exceeded" {
+			switch {
+			case errors.Is(err, errNotFound):
+				return res, nil
+			case errors.As(err, &pe):
+				res.Partial, res.PartialCapped = true, pe.capped
+			case res.Pages > 0 && errors.As(err, &ae) && ae.Code == "quota_exceeded":
 				res.Stopped = "the monthly allowance ran out while paging; kept the pages fetched so far"
 				return res, nil
+			default:
+				return res, err
 			}
-			return res, err
 		}
 		res.Pages++
 		res.Units += page.Meta.UnitsCharged

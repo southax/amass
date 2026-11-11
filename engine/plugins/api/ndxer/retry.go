@@ -155,8 +155,9 @@ func (b backoff) retry(ctx context.Context, try func() error) error {
 }
 
 // pendingWait is the longest the plugin waits, per domain and endpoint, for
-// ndxer to finish looking up a domain it has not seen before (HTTP 202).
-const pendingWait = 120 * time.Second
+// ndxer to finish: a domain it has not seen before (HTTP 202), or one whose
+// list is still being added to (200 with meta.status "partial").
+const pendingWait = 15 * time.Minute
 
 // pendingDefaultWait is the wait between polls when a 202 has no usable Retry-After.
 const pendingDefaultWait = 5 * time.Second
@@ -164,10 +165,32 @@ const pendingDefaultWait = 5 * time.Second
 // pendingMaxWait caps one wait between polls.
 const pendingMaxWait = 30 * time.Second
 
-// pendingError is what one attempt returns when ndxer answered 202.
-type pendingError struct{ retryAfter string }
+// pendingError is what one attempt returns when ndxer answered 202, or a 200
+// whose meta.status is "partial" (partial is then true and the body has been
+// decoded: it is a valid, incomplete page).
+type pendingError struct {
+	retryAfter string
+	partial    bool
+}
 
-func (e *pendingError) Error() string { return "ndxer: lookup still pending" }
+func (e *pendingError) Error() string {
+	if e.partial {
+		return "ndxer: list still being added to"
+	}
+	return "ndxer: lookup still pending"
+}
+
+// partialError is returned when the last answer was a valid but partial page
+// and the plugin did not wait for the rest: noWait was set, or the wait
+// budget ran out (capped). The decoded page is usable.
+type partialError struct{ capped bool }
+
+func (e *partialError) Error() string { return "ndxer: partial list" }
+
+// waitNote is told once per subject and endpoint that the plugin starts to
+// wait; partial says whether it waits for a list being added to (true) or for
+// a domain ndxer has not seen before (false).
+type waitNote func(partial bool)
 
 // pendingDelay is the wait before polling again.
 func pendingDelay(retryAfter string) time.Duration {
@@ -181,8 +204,10 @@ func pendingDelay(retryAfter string) time.Duration {
 // await runs b.retry and, while its result is a *pendingError, waits and
 // runs it again. Each retry call has its own attempt budget, so polls of a
 // pending lookup never use up the error retries. *waited is the pending
-// wait already spent for this subject, shared across its pages.
-func (b backoff) await(ctx context.Context, subject string, waited *time.Duration, try func() error) error {
+// wait already spent for this subject, shared across its pages. With noWait
+// it never waits: a partial page comes back as *partialError, a 202 as an
+// error. note, when set, is called once before the first wait.
+func (b backoff) await(ctx context.Context, subject string, waited *time.Duration, noWait bool, note waitNote, try func() error) error {
 	if waited == nil {
 		local := time.Duration(0)
 		waited = &local
@@ -198,8 +223,17 @@ func (b backoff) await(ctx context.Context, subject string, waited *time.Duratio
 			return err
 		}
 		remaining := pendingWait - *waited
+		if pe.partial && (noWait || remaining <= 0) {
+			return &partialError{capped: !noWait}
+		}
+		if noWait {
+			return fmt.Errorf("ndxer has not looked at %s before and is looking it up now; it did not wait because %s is set. Run again in a few minutes, or unset %s to wait for it", subject, envNoWait, envNoWait)
+		}
 		if remaining <= 0 {
-			return fmt.Errorf("ndxer is still looking up %s; run again shortly", subject)
+			return fmt.Errorf("ndxer was still looking up %s after %s; run again shortly", subject, pendingWait)
+		}
+		if *waited == 0 && note != nil {
+			note(pe.partial)
 		}
 		d := min(pendingDelay(pe.retryAfter), remaining)
 		if err := sleep(ctx, d); err != nil {

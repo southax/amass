@@ -38,6 +38,10 @@ type hostnamesResult struct {
 	FailFast        bool
 	UnitsToComplete int
 	UnitsRemaining  int
+	// Partial is set when the list was read while more was still being added
+	// for the domain; PartialCapped when that was after the whole wait.
+	Partial       bool
+	PartialCapped bool
 }
 
 // normaliseName lower-cases and trims a name, strips a trailing dot and any
@@ -75,10 +79,15 @@ func (c *client) hostnames(ctx context.Context, domain string, keep func(string)
 
 		var page hostnamesPage
 		if err := c.get(ctx, domain, hostnamesPath, params, &page, &pendingWaited); err != nil {
-			if errors.Is(err, errNotFound) {
+			var pe *partialError
+			switch {
+			case errors.Is(err, errNotFound):
 				return res, nil
+			case errors.As(err, &pe):
+				res.Partial, res.PartialCapped = true, pe.capped
+			default:
+				return res, err
 			}
-			return res, err
 		}
 		res.Pages++
 		res.Units += page.Meta.UnitsCharged
