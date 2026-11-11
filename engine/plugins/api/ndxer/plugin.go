@@ -16,12 +16,17 @@ import (
 	"github.com/owasp-amass/amass/v5/config"
 	"github.com/owasp-amass/amass/v5/engine/plugins/support"
 	et "github.com/owasp-amass/amass/v5/engine/types"
+	dbt "github.com/owasp-amass/asset-db/types"
 	oam "github.com/owasp-amass/open-asset-model"
 	oamdns "github.com/owasp-amass/open-asset-model/dns"
 	"golang.org/x/time/rate"
 )
 
 const (
+	// storeAttempts and storeRetryStep bound the retries of a racing asset write.
+	storeAttempts  = 4
+	storeRetryStep = 250 * time.Millisecond
+
 	pluginName = "ndxer"
 	envAPIKey  = "NDXER_API_KEY"
 )
@@ -247,9 +252,20 @@ func (p *ndxerPlugin) addToScope(e *et.Event, domain string) (bool, error) {
 		return false, nil
 	}
 
-	ents := support.StoreFQDNsWithSource(e.Session, []string{domain}, p.source, p.name, p.name+"-Handler")
+	// The asset store can fail a write that races another plugin's write of
+	// the same name ("sql: no rows in result set" from an upsert); that is
+	// transient, so try a few times before giving the domain up.
+	var ents []*dbt.Entity
+	for attempt := 0; attempt < storeAttempts && len(ents) == 0; attempt++ {
+		if attempt > 0 {
+			if err := sleepContext(e.Session.Ctx(), time.Duration(attempt)*storeRetryStep); err != nil {
+				return false, err
+			}
+		}
+		ents = support.StoreFQDNsWithSource(e.Session, []string{domain}, p.source, p.name, p.name+"-Handler")
+	}
 	if len(ents) == 0 {
-		return false, errors.New("the domain could not be stored")
+		return false, fmt.Errorf("the domain could not be stored after %d attempts", storeAttempts)
 	}
 	ent := ents[0]
 
