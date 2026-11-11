@@ -7,6 +7,7 @@ package enum
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -280,6 +281,11 @@ func CLIWorkflow(cmdName string, clArgs []string) {
 				if err := tools.WriteLogMessage(l, message); err != nil {
 					fmt.Println(err.Error())
 				}
+				if line := ndxerLine(message); line != "" && !args.Options.Silent {
+					// ndxer's lines say what it added to the scope and when a
+					// list is partial; they belong on the terminal, not only in the log.
+					_, _ = fmt.Fprintf(color.Error, "\r\033[K%s\n", line)
+				}
 			case <-t.C:
 				if stats, err := getStats(c, token); err == nil && stats != nil {
 					if !args.Options.Silent {
@@ -514,4 +520,37 @@ func printScope(c *client.Client, token uuid.UUID) {
 			fmt.Println(name)
 		}
 	}
+}
+
+// ndxerLine returns the text of a session log message written by the ndxer
+// plugin, with its domain or seed, or "" for any other message.
+func ndxerLine(message string) string {
+	var m struct {
+		Msg    string `json:"msg"`
+		Level  string `json:"level"`
+		Plugin struct {
+			Name string `json:"name"`
+		} `json:"plugin"`
+		Domain string `json:"domain"`
+		Seed   string `json:"seed"`
+		Class  string `json:"class"`
+		Reason string `json:"reason"`
+	}
+	if json.Unmarshal([]byte(message), &m) != nil || m.Plugin.Name != "ndxer" {
+		return ""
+	}
+	switch m.Msg {
+	case "Plugin started", "Plugin stopped", "":
+		return ""
+	case "ndxer related domain not added (review)":
+		// the summary line already lists them; each one's reason stays in the log
+		return ""
+	case "ndxer related domain added", "ndxer related domain not added (rigid boundaries)":
+		// one line per domain: the domain, its class and why
+		return fmt.Sprintf("  %s  %-8s %s", m.Domain, m.Class, m.Reason)
+	}
+	if m.Level == "WARN" || m.Level == "ERROR" {
+		return m.Level + " " + m.Msg
+	}
+	return m.Msg
 }
