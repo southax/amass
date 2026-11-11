@@ -35,7 +35,7 @@ func main() {
 		return
 	}
 
-	c, err := client.NewClient("http://" + hostname + ":4000")
+	c, err := client.NewClient("http://" + hostname + ":" + enginePort())
 	if err != nil {
 		os.Exit(1)
 	}
@@ -48,4 +48,13 @@ func main() {
 		// a failure to respond indicates that the server is not yet available
 		os.Exit(1)
 	}
+}
+
+// enginePort returns the port the engine API listens on: AMASS_ENGINE_PORT
+// when set, otherwise 4000.
+func enginePort() string {
+	if p := os.Getenv("AMASS_ENGINE_PORT"); p != "" {
+		return p
+	}
+	return "4000"
 }

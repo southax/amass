@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"log/slog"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -51,7 +52,7 @@ func NewServer(logger *slog.Logger, d et.Dispatcher, mgr et.SessionManager) (*Se
 		mgr:    mgr,
 		ch:     make(chan struct{}),
 		srv: &http.Server{
-			Addr:         ":4000",
+			Addr:         ":" + enginePort(),
 			Handler:      r,
 			ReadTimeout:  15 * time.Second,
 			WriteTimeout: 15 * time.Second,
@@ -157,4 +158,13 @@ func writeError(w http.ResponseWriter, status int, msg string, err error) {
 		out.Details = err.Error()
 	}
 	writeJSON(w, status, out)
+}
+
+// enginePort returns the port the engine API listens on: AMASS_ENGINE_PORT
+// when set, otherwise 4000.
+func enginePort() string {
+	if p := os.Getenv("AMASS_ENGINE_PORT"); p != "" {
+		return p
+	}
+	return "4000"
 }

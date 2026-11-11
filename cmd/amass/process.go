@@ -15,7 +15,7 @@ import (
 )
 
 func engineIsRunning() bool {
-	c, err := client.NewClient("http://127.0.0.1:4000")
+	c, err := client.NewClient("http://127.0.0.1:" + enginePort())
 	if err != nil {
 		return false
 	}
@@ -50,4 +50,13 @@ func startEngine() error {
 	}
 
 	return cmd.Start()
+}
+
+// enginePort returns the port the engine API listens on: AMASS_ENGINE_PORT
+// when set, otherwise 4000.
+func enginePort() string {
+	if p := os.Getenv("AMASS_ENGINE_PORT"); p != "" {
+		return p
+	}
+	return "4000"
 }
